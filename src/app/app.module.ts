@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { TodosComponent } from './todos/todos.component';
 import { TodoPipe } from './todos/todo.pipe';
+import { TodoBoldDirective } from './todos/todo-bold.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodosComponent,
-    TodoPipe
+    TodoPipe,
+    TodoBoldDirective
   ],
   imports: [
     BrowserModule,
