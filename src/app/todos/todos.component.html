@@ -1,28 +1,22 @@
 <div class="container">
     <div class="row">
       <div class="input-group mb-3">
-
-        <!-- Two way i kullanmak için FormsMOdul ü import etmen gerek. 2 wayde hem value hem inputu içeriyormuş gibi davranır ngModel -->
-        <!-- One way bindging -->
-
-        <input
+        <!-- two-way model binding -->
+        <!-- FormsModule import etmemiz gerekiyor two -way model binding kullanabilmek için -->
+        <!-- <input
           #inpt
-          (input)="search(inpt.value)"
+          [(ngModel)]="editItem.title"
           type="text"
           class="form-control"
-          placeholder="Search"
+          placeholder="Todo"
           aria-label="Username"
           aria-describedby="basic-addon1"
-        />
-
-        <br>
-
-
+        /> -->
+  
         <input
           #inpt
-          [value]="editItem?.title || ''"  
           type="text"
-          class="form-control"
+          class="d-block form-control"
           placeholder="Todo"
           aria-label="Username"
           aria-describedby="basic-addon1"
@@ -35,26 +29,39 @@
           >
             Güncelle
           </button>
-          <button [disabled]="editMode" class="btn btn-secondary" (click)="add()">
+          <button
+            [disabled]="editMode"
+            class="btn btn-secondary"
+            (click)="add(inpt)"
+          >
             Ekle
           </button>
         </div>
+  
+        <br />
+      </div>
+      <div class="mb-3">
+        <input
+          #inptSearch
+          (input)="search(inptSearch.value)"
+          type="text"
+          class="d-block form-control"
+          placeholder="Search"
+          aria-label="Username"
+          aria-describedby="basic-addon1"
+        />
       </div>
     </div>
     <div class="row">
-      <ul class="list-group" *ngFor="let todo of data">
+      <ul class="list-group" *ngFor="let todo of filteredData">
         <li class="list-group-item d-flex justify-content-between">
-          <div>
-            {{ todo.title }} {{todo.completed | todoPipe}}
-          </div>
+          <div>{{ todo.title }} {{ todo.completed | todoPipe }}</div>
   
           <div>
-            <button class="btn btn-primary" (click)="edit(todo.id)">
+            <button class="btn btn-primary" (click)="edit(todo.id, inpt)">
               Düzenle
             </button>
-            <button class="btn btn-close m-2" (click)="add(inpt)"> Ekle </button>
-
-            <button class="btn btn-close m-2" (click)="delete(todo.id)"> Sil </button>
+            <button class="btn btn-close m-2" (click)="delete(todo.id)"></button>
           </div>
         </li>
       </ul>
