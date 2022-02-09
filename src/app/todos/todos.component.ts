@@ -22,6 +22,7 @@ export class TodosComponent implements OnInit {
   constructor(private httpClient: HttpClient) {}
 
   data: Todo[] = [];
+  filteredData: Todo[] = [];
 
   ngOnInit(): void {
     // promise Then burada subscribe karşılık gelir.
@@ -39,7 +40,7 @@ export class TodosComponent implements OnInit {
     this.editMode = true;
     const editData = this.data.find((x) => x.id == id);
     // as Todo tip tanımlama için kullanılıyor
-    
+
     this.editItem = editData || ({} as Todo); 
   }
 
@@ -51,9 +52,24 @@ export class TodosComponent implements OnInit {
     this.editItem= {} as Todo;
   }
 
-  add() {}
+  add(inpt: HTMLInputElement) {
+    const todo: Todo = {title: inpt.value, userId:1, id:Math.random(), completed:false};
+    this.data = [todo, ... this.data];
+    inpt.value='';
+  }
 
   delete(id: number) {
     this.editMode = false;
+    const result = window.confirm("silmek istediğinize emin misiniz");
+
+    if(result){
+      this.data = [...this.data.filter(x=>x.id != id)];
+    }
   }
+
+
+  search(searchText:string){
+    const filteredData = this.data.filter(x=>x.title.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()));
+  }
+
 }

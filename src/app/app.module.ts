@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { TodosComponent } from './todos/todos.component';
+import { TodoPipe } from './todos/todo.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TodosComponent
+    TodosComponent,
+    TodoPipe
   ],
   imports: [
     BrowserModule,
