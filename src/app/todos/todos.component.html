@@ -4,6 +4,20 @@
 
         <!-- Two way i kullanmak için FormsMOdul ü import etmen gerek. 2 wayde hem value hem inputu içeriyormuş gibi davranır ngModel -->
         <!-- One way bindging -->
+
+        <input
+          #inpt
+          (input)="search(inpt.value)"
+          type="text"
+          class="form-control"
+          placeholder="Search"
+          aria-label="Username"
+          aria-describedby="basic-addon1"
+        />
+
+        <br>
+
+
         <input
           #inpt
           [value]="editItem?.title || ''"  
@@ -31,14 +45,16 @@
       <ul class="list-group" *ngFor="let todo of data">
         <li class="list-group-item d-flex justify-content-between">
           <div>
-            {{ todo.title }}
+            {{ todo.title }} {{todo.completed | todoPipe}}
           </div>
   
           <div>
             <button class="btn btn-primary" (click)="edit(todo.id)">
               Düzenle
             </button>
-            <button class="btn btn-close m-2"></button>
+            <button class="btn btn-close m-2" (click)="add(inpt)"> Ekle </button>
+
+            <button class="btn btn-close m-2" (click)="delete(todo.id)"> Sil </button>
           </div>
         </li>
       </ul>
