@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="row">
+      <div class="input-group mb-3">
+
+        <!-- Two way i kullanmak için FormsMOdul ü import etmen gerek. 2 wayde hem value hem inputu içeriyormuş gibi davranır ngModel -->
+        <!-- One way bindging -->
+        <input
+          #inpt
+          [value]="editItem?.title || ''"  
+          type="text"
+          class="form-control"
+          placeholder="Todo"
+          aria-label="Username"
+          aria-describedby="basic-addon1"
+        />
+        <div class="input-group-prepend">
+          <button
+            [hidden]="!editMode"
+            class="btn btn-info"
+            (click)="update(inpt)"
+          >
+            Güncelle
+          </button>
+          <button [disabled]="editMode" class="btn btn-secondary" (click)="add()">
+            Ekle
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <ul class="list-group" *ngFor="let todo of data">
+        <li class="list-group-item d-flex justify-content-between">
+          <div>
+            {{ todo.title }}
+          </div>
+  
+          <div>
+            <button class="btn btn-primary" (click)="edit(todo.id)">
+              Düzenle
+            </button>
+            <button class="btn btn-close m-2"></button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
